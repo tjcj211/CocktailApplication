@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".IngredientsSearch">
+
+    <Spinner
+        android:id="@+id/spnrIngredient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/cocktailIngredients" />
+
+    <Spinner
+        android:id="@+id/spnrName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/imgCocktailThumbnail"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:contentDescription="@string/cocktailThumbnail"
+        app:srcCompat="@android:drawable/list_selector_background" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lblSearch"
+        android:onClick="findDrink"/>
+</LinearLayout>
