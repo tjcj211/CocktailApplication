@@ -7,6 +7,9 @@
 package edu.quinnipiac.ser210.cocktailapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToDrinkWithRandom(View view) { //Gets a random drink and displays it
         new FetchCocktail().execute();
+
     }
 
 
@@ -112,12 +116,19 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String[] result) { //Places all components of a drink and passes to CocktailDisplay
             if(result != null){
-                Intent intent = new Intent(MainActivity.this,CocktailDisplay.class);
-                intent.putExtra("name",result[0]);
-                intent.putExtra("recipe", result[1]);
-                intent.putExtra("image", result[2]);
-                intent.putExtra("ingredients", result[3]);
-                startActivity(intent);
+                //Handles switching fragments
+                Fragment cocktail = new CocktailDisplayFragment();
+                FragmentManager fm = getSupportFragmentManager();
+                FragmentTransaction fr_transaction = fm.beginTransaction();
+                fr_transaction.replace(R.id.mainFragment, cocktail);
+                fr_transaction.commit();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("name",result[0]);
+                bundle.putString("recipe", result[1]);
+                bundle.putString("image", result[2]);
+                bundle.putString("ingredients", result[3]);
+                cocktail.setArguments(bundle);
             }
 
         }
